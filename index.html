@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monadium Jobs | For Developers, By Developers</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="min-h-screen bg-base-200">
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-lg">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>Jobs</a></li>
+                    <li><a>Companies</a></li>
+                    <li><a>Resources</a></li>
+                    <li><a>About</a></li>
+                </ul>
+            </div>
+            <a class="btn btn-ghost text-xl font-mono">
+                <span class="text-primary">&lt;</span>Monadium<span class="text-secondary">/&gt;</span>
+            </a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 font-mono">
+                <li><a class="hover:text-primary">Jobs</a></li>
+                <li><a class="hover:text-primary">Companies</a></li>
+                <li><a class="hover:text-primary">Resources</a></li>
+                <li><a class="hover:text-primary">About</a></li>
+            </ul>
+        </div>
+        <div class="navbar-end">
+            <a class="btn btn-primary mr-2">Login</a>
+            <a class="btn btn-secondary">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero min-h-[70vh] bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="mockup-code max-w-md">
+                <pre data-prefix="$"><code>find_job --lang="any" --remote=true</code></pre>
+                <pre data-prefix=">" class="text-warning"><code>Searching Monadium database...</code></pre>
+                <pre data-prefix=">" class="text-success"><code>Found 1,337 matching positions</code></pre>
+            </div>
+            <div>
+                <h1 class="text-5xl font-bold font-mono">
+                    <span class="text-primary">function</span> 
+                    <span class="text-secondary">findDreamJob</span>() {
+                </h1>
+                <p class="py-6 font-mono">
+                    Where functional programmers, full-stack wizards, and algorithm ninjas find their next adventure. 
+                    No recruiters, no noise—just pure tech opportunities curated for developers by developers.
+                </p>
+                <div class="join">
+                    <input class="input input-bordered join-item" placeholder="Search jobs..."/>
+                    <button class="btn btn-primary join-item">Search</button>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <div class="badge badge-outline">React</div>
+                    <div class="badge badge-outline">Python</div>
+                    <div class="badge badge-outline">Rust</div>
+                    <div class="badge badge-outline">Go</div>
+                    <div class="badge badge-outline">TypeScript</div>
+                    <div class="badge badge-primary">Remote</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-12 bg-base-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold font-mono text-primary">
+                    Why Monadium Jobs?
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl mx-auto">
+                    Built with the same care as your best code.
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <i class="fas fa-code text-primary"></i>
+                                <h3>Tech-First Approach</h3>
+                            </div>
+                            <p>Jobs curated specifically for developers, with accurate tech stack details and realistic requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <i class="fas fa-filter text-primary"></i>
+                                <h3>No Recruiter Spam</h3>
+                            </div>
+                            <p>Direct connections to engineering teams. No middlemen, no "urgent requirements," just real opportunities.</p>
+                        </div>
+                    </div>
+
+                    <div class="card bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <i class="fas fa-terminal text-primary"></i>
+                                <h3>Salary Transparency</h3>
+                            </div>
+                            <p>Every listing includes real salary ranges. No more guessing games or wasted interview cycles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Categories -->
+    <div class="py-12 bg-base-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold font-mono text-center text-secondary mb-8">
+                Popular Categories
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="stat bg-base-100 shadow">
+                    <div class="stat-figure text-primary">
+                        <i class="fas fa-laptop-code text-3xl"></i>
+                    </div>
+                    <div class="stat-title">Frontend</div>
+                    <div class="stat-value text-primary">421</div>
+                    <div class="stat-desc">Jobs Available</div>
+                </div>
+                <div class="stat bg-base-100 shadow">
+                    <div class="stat-figure text-secondary">
+                        <i class="fas fa-server text-3xl"></i>
+                    </div>
+                    <div class="stat-title">Backend</div>
+                    <div class="stat-value text-secondary">512</div>
+                    <div class="stat-desc">Jobs Available</div>
+                </div>
+                <div class="stat bg-base-100 shadow">
+                    <div class="stat-figure text-accent">
+                        <i class="fas fa-database text-3xl"></i>
+                    </div>
+                    <div class="stat-title">Data</div>
+                    <div class="stat-value text-accent">218</div>
+                    <div class="stat-desc">Jobs Available</div>
+                </div>
+                <div class="stat bg-base-100 shadow">
+                    <div class="stat-figure text-info">
+                        <i class="fas fa-shield-alt text-3xl"></i>
+                    </div>
+                    <div class="stat-title">Security</div>
+                    <div class="stat-value text-info">186</div>
+                    <div class="stat-desc">Jobs Available</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="py-12 bg-base-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title font-mono text-2xl">Subscribe to our newsletter</h2>
+                    <p>Get weekly updates on the best developer jobs delivered to your inbox.</p>
+                    <div class="form-control">
+                        <div class="input-group">
+                            <input type="text" placeholder="your@email.com" class="input input-bordered w-full" />
+                            <button class="btn btn-primary">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer p-10 bg-neutral text-neutral-content">
+        <aside>
+            <a class="text-xl font-mono">
+                <span class="text-primary">&lt;</span>Monadium<span class="text-secondary">/&gt;</span>
+            </a>
+            <p>Connecting developers with meaningful work since 2025.</p>
+        </aside> 
+        <nav>
+            <header class="footer-title">Services</header> 
+            <a class="link link-hover">Job Search</a>
+            <a class="link link-hover">Company Profiles</a>
+            <a class="link link-hover">Salary Data</a>
+            <a class="link link-hover">Interview Prep</a>
+        </nav> 
+        <nav>
+            <header class="footer-title">Company</header> 
+            <a class="link link-hover">About us</a>
+            <a class="link link-hover">Contact</a>
+            <a class="link link-hover">Jobs</a>
+            <a class="link link-hover">Press kit</a>
+        </nav> 
+        <nav>
+            <header class="footer-title">Legal</header> 
+            <a class="link link-hover">Terms of use</a>
+            <a class="link link-hover">Privacy policy</a>
+            <a class="link link-hover">Cookie policy</a>
+        </nav>
+    </footer>
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+        <aside>
+            <p>Copyright © 2025 - All rights reserved by Monadium Jobs Ltd</p>
+        </aside>
+    </footer>
+</body>
+</html>
