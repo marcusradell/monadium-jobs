@@ -1,3 +1,9 @@
+import { integer, pgTable } from "drizzle-orm/pg-core";
+
+export const jobs = pgTable("jobs", {
+  // Use the job data as the foundation for a Drizzle schema's column declarations. AI!
+});
+
 const job = {
   id: "29293122",
   external_id: "46-556284-2319-747481610",
