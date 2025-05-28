@@ -1,15 +1,18 @@
-import { describe, it } from 'node:test';
+import { describe, it, mock } from 'node:test';
 import assert from 'node:assert';
 import { importJobsFromArray } from './importJobs';
+import { db } from './index';
 
-// Mock the database operations
-jest.mock('./index', () => ({
-  db: {
-    insert: jest.fn().mockReturnValue({
-      values: jest.fn().mockResolvedValue(undefined)
-    })
-  }
-}));
+// Mock the database module
+mock.module('./index', () => {
+  return {
+    db: {
+      insert: () => ({
+        values: () => Promise.resolve(undefined)
+      })
+    }
+  };
+});
 
 describe('importJobs', () => {
   it('should process job data correctly', async () => {
