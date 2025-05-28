@@ -1,96 +1,56 @@
 import { db } from './index';
 import { jobs } from './schema';
 import fs from 'fs';
-import readline from 'readline';
+import { createReadStream } from 'fs';
 import { pipeline } from 'stream/promises';
 
 /**
- * Streams job data from a file and inserts it into the database in chunks
- * @param filePath Path to the jobs.ts file
+ * Streams job data from a JSON file and inserts it into the database in chunks
+ * @param filePath Path to the jobs.json file
  * @param chunkSize Number of jobs to process in each batch (default: 100)
  * @returns Promise that resolves when all jobs are imported
  */
 export async function importJobsFromFile(filePath: string, chunkSize = 100): Promise<void> {
   console.log(`Starting import from ${filePath} with chunk size ${chunkSize}`);
   
-  // Create a readable stream from the file
-  const fileStream = fs.createReadStream(filePath, { encoding: 'utf-8' });
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity
-  });
-
-  let inJobsArray = false;
-  let currentJob = '';
-  let jobBuffer: any[] = [];
-  let totalImported = 0;
-
-  // Process the file line by line
-  for await (const line of rl) {
-    // Detect the start of the jobs array
-    if (line.includes('const jobs = [')) {
-      inJobsArray = true;
-      continue;
+  try {
+    // Read the JSON file
+    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+    
+    // Parse the JSON content
+    let jobsData;
+    try {
+      jobsData = JSON.parse(fileContent);
+    } catch (error) {
+      console.error('Error parsing JSON file:', error);
+      throw new Error('Invalid JSON format in the input file');
     }
     
-    // Detect the end of the jobs array
-    if (inJobsArray && line.includes('];')) {
-      inJobsArray = false;
-      
-      // Process any remaining jobs in the buffer
-      if (jobBuffer.length > 0) {
-        await insertJobsChunk(jobBuffer);
-        totalImported += jobBuffer.length;
-        jobBuffer = [];
-      }
-      continue;
-    }
-
-    // If we're in the jobs array, collect job objects
-    if (inJobsArray) {
-      // If line starts with '{', begin a new job object
-      if (line.trim().startsWith('{')) {
-        currentJob = line;
-      } 
-      // If we're already collecting a job object, append this line
-      else if (currentJob) {
-        currentJob += line;
-      }
-
-      // If line ends with '},' or '}', the job object is complete
-      if (line.trim().endsWith('},') || line.trim().endsWith('}')) {
-        try {
-          // Convert the job string to an object
-          // Remove trailing comma if present
-          const jobStr = currentJob.endsWith(',') 
-            ? currentJob.slice(0, -1) 
-            : currentJob;
-          
-          // Use Function constructor to safely evaluate the job object
-          // This is safer than eval() for parsing JavaScript objects
-          const jobObject = new Function(`return ${jobStr}`)();
-          
-          // Add to buffer
-          jobBuffer.push(jobObject);
-          currentJob = '';
-          
-          // If buffer reaches chunk size, insert and clear
-          if (jobBuffer.length >= chunkSize) {
-            await insertJobsChunk(jobBuffer);
-            totalImported += jobBuffer.length;
-            jobBuffer = [];
-            console.log(`Imported ${totalImported} jobs so far...`);
-          }
-        } catch (error) {
-          console.error('Error parsing job object:', error);
-          console.error('Problematic job string:', currentJob);
-          currentJob = '';
-        }
+    // Check if the parsed data is an array
+    if (!Array.isArray(jobsData)) {
+      // If it's an object with a jobs property that is an array, use that
+      if (jobsData && Array.isArray(jobsData.jobs)) {
+        jobsData = jobsData.jobs;
+      } else {
+        throw new Error('The JSON file does not contain a jobs array');
       }
     }
+    
+    // Process the jobs array in chunks
+    let totalImported = 0;
+    
+    for (let i = 0; i < jobsData.length; i += chunkSize) {
+      const chunk = jobsData.slice(i, i + chunkSize);
+      await insertJobsChunk(chunk);
+      totalImported += chunk.length;
+      console.log(`Imported ${totalImported} of ${jobsData.length} jobs...`);
+    }
+    
+    console.log(`Import complete. Total jobs imported: ${totalImported}`);
+  } catch (error) {
+    console.error('Error importing jobs:', error);
+    throw error;
   }
-
-  console.log(`Import complete. Total jobs imported: ${totalImported}`);
 }
 
 /**
