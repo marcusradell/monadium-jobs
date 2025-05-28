@@ -1,0 +1,1 @@
+ALTER TABLE "jobs" ALTER COLUMN "timestamp" SET DATA TYPE bigint;

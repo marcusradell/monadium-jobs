@@ -1,0 +1,506 @@
+{
+  "id": "7ca9dbfe-ee83-4ff6-8ede-49d957b5919b",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.jobs": {
+      "name": "jobs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "external_id": {
+          "name": "external_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "original_id": {
+          "name": "original_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "webpage_url": {
+          "name": "webpage_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "logo_url": {
+          "name": "logo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "headline": {
+          "name": "headline",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_deadline": {
+          "name": "application_deadline",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "number_of_vacancies": {
+          "name": "number_of_vacancies",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_text": {
+          "name": "description_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_text_formatted": {
+          "name": "description_text_formatted",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_company_information": {
+          "name": "description_company_information",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_needs": {
+          "name": "description_needs",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_requirements": {
+          "name": "description_requirements",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description_conditions": {
+          "name": "description_conditions",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employment_type_concept_id": {
+          "name": "employment_type_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employment_type_label": {
+          "name": "employment_type_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employment_type_legacy_ams_taxonomy_id": {
+          "name": "employment_type_legacy_ams_taxonomy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salary_type_concept_id": {
+          "name": "salary_type_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salary_type_label": {
+          "name": "salary_type_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salary_type_legacy_ams_taxonomy_id": {
+          "name": "salary_type_legacy_ams_taxonomy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salary_description": {
+          "name": "salary_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "duration_concept_id": {
+          "name": "duration_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "duration_label": {
+          "name": "duration_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "duration_legacy_ams_taxonomy_id": {
+          "name": "duration_legacy_ams_taxonomy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "working_hours_type_concept_id": {
+          "name": "working_hours_type_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "working_hours_type_label": {
+          "name": "working_hours_type_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "working_hours_type_legacy_ams_taxonomy_id": {
+          "name": "working_hours_type_legacy_ams_taxonomy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope_of_work_min": {
+          "name": "scope_of_work_min",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope_of_work_max": {
+          "name": "scope_of_work_max",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access": {
+          "name": "access",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employer_phone_number": {
+          "name": "employer_phone_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employer_email": {
+          "name": "employer_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employer_url": {
+          "name": "employer_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employer_organization_number": {
+          "name": "employer_organization_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employer_name": {
+          "name": "employer_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "employer_workplace": {
+          "name": "employer_workplace",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_details_information": {
+          "name": "application_details_information",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_details_reference": {
+          "name": "application_details_reference",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_details_email": {
+          "name": "application_details_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_details_via_af": {
+          "name": "application_details_via_af",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_details_url": {
+          "name": "application_details_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_details_other": {
+          "name": "application_details_other",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "experience_required": {
+          "name": "experience_required",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_to_own_car": {
+          "name": "access_to_own_car",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "driving_license_required": {
+          "name": "driving_license_required",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "driving_license": {
+          "name": "driving_license",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_concept_id": {
+          "name": "occupation_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_label": {
+          "name": "occupation_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_legacy_ams_taxonomy_id": {
+          "name": "occupation_legacy_ams_taxonomy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_group_concept_id": {
+          "name": "occupation_group_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_group_label": {
+          "name": "occupation_group_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_group_legacy_ams_taxonomy_id": {
+          "name": "occupation_group_legacy_ams_taxonomy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_field_concept_id": {
+          "name": "occupation_field_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_field_label": {
+          "name": "occupation_field_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "occupation_field_legacy_ams_taxonomy_id": {
+          "name": "occupation_field_legacy_ams_taxonomy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_municipality": {
+          "name": "workplace_municipality",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_municipality_code": {
+          "name": "workplace_municipality_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_municipality_concept_id": {
+          "name": "workplace_municipality_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_region": {
+          "name": "workplace_region",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_region_code": {
+          "name": "workplace_region_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_region_concept_id": {
+          "name": "workplace_region_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_country": {
+          "name": "workplace_country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_country_code": {
+          "name": "workplace_country_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_country_concept_id": {
+          "name": "workplace_country_concept_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_street_address": {
+          "name": "workplace_street_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_postcode": {
+          "name": "workplace_postcode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_city": {
+          "name": "workplace_city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_coordinates_longitude": {
+          "name": "workplace_coordinates_longitude",
+          "type": "numeric(10, 5)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workplace_coordinates_latitude": {
+          "name": "workplace_coordinates_latitude",
+          "type": "numeric(10, 5)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "must_have": {
+          "name": "must_have",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nice_to_have": {
+          "name": "nice_to_have",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "application_contacts": {
+          "name": "application_contacts",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publication_date": {
+          "name": "publication_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_publication_date": {
+          "name": "last_publication_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "removed": {
+          "name": "removed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "removed_date": {
+          "name": "removed_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_type": {
+          "name": "source_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timestamp": {
+          "name": "timestamp",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
