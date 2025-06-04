@@ -1,6 +1,6 @@
 "use server";
 
-import { AvailableJobs } from "@/kits/jobs/components/available-jobs";
+import { AvailableJobs } from "@/kits/jobs";
 
 export default async function Home() {
   return (
