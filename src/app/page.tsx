@@ -28,8 +28,8 @@ export default async function Home() {
           <div key={job.id}>
             <h2>{job.headline}</h2>
             <h3>{job.id}</h3>
-            {<a href={job.webpage_url ?? ""}>{job.webpage_url}</a>}
-            <p>{job.description_text}</p>
+            <a href={job.webpage_url ?? ""}>{job.webpage_url}</a>
+            <p className="wrap-anywhere">{job.description_text}</p>
           </div>
         );
       })}
