@@ -22,14 +22,14 @@ export default async function Home() {
   );
   return (
     <>
-      <h1>Monadium Jobs</h1>
+      <h1>Available Jobs</h1>
       {jobsViewModel.map((job) => {
         return (
           <div key={job.id}>
             <h2>{job.headline}</h2>
             <h3>{job.id}</h3>
             <a href={job.webpage_url ?? ""}>{job.webpage_url}</a>
-            <p className="wrap-anywhere">{job.description_text}</p>
+            <p className="wrap-anywhereg25g">{job.description_text}</p>
           </div>
         );
       })}
