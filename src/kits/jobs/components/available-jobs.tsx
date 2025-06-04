@@ -14,12 +14,14 @@ export async function AvailableJobs() {
       webpage_url,
       application_deadline,
       description_text,
+      description_text_formatted,
     }) => ({
       headline,
       id,
       webpage_url,
       application_deadline,
       description_text,
+      description_text_formatted,
     }),
   );
 
@@ -32,7 +34,13 @@ export async function AvailableJobs() {
         <h2>{job.headline}</h2>
         <h3>{job.id}</h3>
         <a href={job.webpage_url ?? ""}>{job.webpage_url}</a>
-        <p className="wrap-anywhere">{job.description_text}</p>
+        <p className="wrap-anywhere">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: job.description_text_formatted!,
+            }}
+          />
+        </p>
       </div>
     );
   });
