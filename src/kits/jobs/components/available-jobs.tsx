@@ -46,7 +46,9 @@ export async function AvailableJobs() {
           <div key={job.id}>
             <h2>{job.headline}</h2>
             <h3>{job.id}</h3>
-            <a href={job.webpage_url ?? ""}>{job.webpage_url}</a>
+            <a className="wrap-anywhere" href={job.webpage_url ?? ""}>
+              {job.webpage_url}
+            </a>
             <div
               className="wrap-anywhere"
               dangerouslySetInnerHTML={{
