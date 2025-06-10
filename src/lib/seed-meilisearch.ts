@@ -14,7 +14,7 @@ export async function seedJobsToMeilisearch() {
     // Clear existing documents first
     console.log('Clearing existing documents...');
     const deleteTask = await index.deleteAllDocuments();
-    await index.waitForTask(deleteTask.taskUid);
+    await meiliClient.waitForTask(deleteTask.taskUid);
     console.log('Existing documents cleared');
     
     let offset = 0;
@@ -53,7 +53,7 @@ export async function seedJobsToMeilisearch() {
         // Add batch to Meilisearch and wait for completion
         console.log(`Adding ${jobsForSearch.length} documents to Meilisearch...`);
         const addTask = await index.addDocuments(jobsForSearch);
-        await index.waitForTask(addTask.taskUid);
+        await meiliClient.waitForTask(addTask.taskUid);
         
         totalSeeded += jobsBatch.length;
         console.log(`Successfully seeded batch of ${jobsBatch.length} jobs (total: ${totalSeeded})`);

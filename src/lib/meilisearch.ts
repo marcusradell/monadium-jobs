@@ -32,7 +32,7 @@ export async function initializeJobsIndex() {
       'workplace_municipality',
     ]);
     console.log('Updating searchable attributes...');
-    await index.waitForTask(searchableTask.taskUid);
+    await meiliClient.waitForTask(searchableTask.taskUid);
 
     // Configure filterable attributes
     const filterableTask = await index.updateFilterableAttributes([
@@ -40,7 +40,7 @@ export async function initializeJobsIndex() {
       'application_deadline',
     ]);
     console.log('Updating filterable attributes...');
-    await index.waitForTask(filterableTask.taskUid);
+    await meiliClient.waitForTask(filterableTask.taskUid);
 
     console.log('Index configuration completed');
   } catch (error) {
