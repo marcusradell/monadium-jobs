@@ -10,7 +10,8 @@ export const jobsIndex = "jobs";
 export async function initializeJobsIndex() {
   try {
     // Create index if it doesn't exist
-    await meiliClient.createIndex(jobsIndex, { primaryKey: "id" });
+    const createTask = await meiliClient.createIndex(jobsIndex, { primaryKey: "id" });
+    await meiliClient.tasks.waitForTask(createTask.taskUid);
     console.log(`Created index: ${jobsIndex}`);
   } catch (error: any) {
     // Index might already exist, which is fine

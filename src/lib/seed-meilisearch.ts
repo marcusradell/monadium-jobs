@@ -54,12 +54,34 @@ export async function seedJobsToMeilisearch() {
         console.log(
           `Adding ${jobsForSearch.length} documents to Meilisearch...`,
         );
-        const addTask = await index.addDocuments(jobsForSearch);
-        await meiliClient.tasks.waitForTask(addTask.taskUid);
+        
+        // Validate that documents have required id field
+        const validDocuments = jobsForSearch.filter(doc => doc.id);
+        if (validDocuments.length !== jobsForSearch.length) {
+          console.warn(`Filtered out ${jobsForSearch.length - validDocuments.length} documents without valid IDs`);
+        }
+        
+        if (validDocuments.length === 0) {
+          console.warn("No valid documents to add in this batch, skipping...");
+          offset += batchSize;
+          continue;
+        }
 
-        totalSeeded += jobsBatch.length;
+        const addTask = await index.addDocuments(validDocuments);
+        console.log(`Task UID: ${addTask.taskUid}, waiting for completion...`);
+        
+        // Wait for the task and check its status
+        const taskResult = await meiliClient.tasks.waitForTask(addTask.taskUid);
+        console.log(`Task status: ${taskResult.status}`);
+        
+        if (taskResult.status === 'failed') {
+          console.error(`Task failed:`, taskResult.error);
+          throw new Error(`MeiliSearch task failed: ${JSON.stringify(taskResult.error)}`);
+        }
+
+        totalSeeded += validDocuments.length;
         console.log(
-          `Successfully seeded batch of ${jobsBatch.length} jobs (total: ${totalSeeded})`,
+          `Successfully seeded batch of ${validDocuments.length} jobs (total: ${totalSeeded})`,
         );
 
         // If we got fewer jobs than the batch size, we've reached the end
@@ -80,7 +102,16 @@ export async function seedJobsToMeilisearch() {
     // Verify the seeding worked
     const stats = await index.getStats();
     console.log(`Meilisearch index stats:`, stats);
+    
+    // Also check document count
+    const documents = await index.getDocuments({ limit: 1 });
+    console.log(`Sample document:`, documents.results[0]);
+    console.log(`Total documents in index: ${stats.numberOfDocuments}`);
     console.log(`Completed seeding ${totalSeeded} jobs to Meilisearch`);
+    
+    if (stats.numberOfDocuments === 0) {
+      throw new Error("No documents were successfully added to the index!");
+    }
   } catch (error) {
     console.error("Error seeding jobs to Meilisearch:", error);
     throw error;
