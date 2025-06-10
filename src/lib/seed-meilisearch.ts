@@ -14,11 +14,12 @@ export async function seedJobsToMeilisearch() {
       const deleteIndexTask = await meiliClient.deleteIndex(jobsIndex);
       await meiliClient.tasks.waitForTask(deleteIndexTask.taskUid);
       console.log("Existing index deleted");
-    } catch (error: any) {
+    } catch (error) {
+      console.warn(error);
       // Index might not exist, which is fine
-      if (!error.message?.includes("not found")) {
-        console.error("Error deleting index:", error);
-      }
+      // if (!error.message?.includes("not found")) {
+      //   console.error("Error deleting index:", error);
+      // }
     }
 
     await initializeJobsIndex();

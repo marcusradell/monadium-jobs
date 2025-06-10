@@ -18,7 +18,11 @@ export async function initializeJobsIndex() {
       timeout: 60000,
     });
     console.log(`Created index: ${jobsIndex}`);
-  } catch (error: any) {
+  } catch (error) {
+    if (!(error instanceof Error)) {
+      throw error;
+    }
+
     // Index might already exist, which is fine
     if (!error.message?.includes("already exists")) {
       console.error("Error creating index:", error);
