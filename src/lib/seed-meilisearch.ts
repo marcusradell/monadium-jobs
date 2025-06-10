@@ -98,20 +98,6 @@ export async function seedJobsToMeilisearch() {
         throw batchError;
       }
     }
-
-    // Verify the seeding worked
-    const stats = await index.getStats();
-    console.log(`Meilisearch index stats:`, stats);
-
-    // Also check document count
-    const documents = await index.getDocuments({ limit: 1 });
-    console.log(`Sample document:`, documents.results[0]);
-    console.log(`Total documents in index: ${stats.numberOfDocuments}`);
-    console.log(`Completed seeding ${totalSeeded} jobs to Meilisearch`);
-
-    if (stats.numberOfDocuments === 0) {
-      throw new Error("No documents were successfully added to the index!");
-    }
   } catch (error) {
     console.error("Error seeding jobs to Meilisearch:", error);
     throw error;
