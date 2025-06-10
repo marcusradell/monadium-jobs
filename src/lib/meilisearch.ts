@@ -8,21 +8,45 @@ export const meiliClient = new MeiliSearch({
 export const JOBS_INDEX = 'jobs';
 
 export async function initializeJobsIndex() {
+  try {
+    // Create index if it doesn't exist
+    await meiliClient.createIndex(JOBS_INDEX, { primaryKey: 'id' });
+    console.log(`Created index: ${JOBS_INDEX}`);
+  } catch (error: any) {
+    // Index might already exist, which is fine
+    if (!error.message?.includes('already exists')) {
+      console.error('Error creating index:', error);
+      throw error;
+    }
+    console.log(`Index ${JOBS_INDEX} already exists`);
+  }
+
   const index = meiliClient.index(JOBS_INDEX);
   
-  // Configure searchable attributes
-  await index.updateSearchableAttributes([
-    'headline',
-    'description_text',
-    'employer_name',
-    'workplace_municipality',
-  ]);
+  try {
+    // Configure searchable attributes
+    const searchableTask = await index.updateSearchableAttributes([
+      'headline',
+      'description_text',
+      'employer_name',
+      'workplace_municipality',
+    ]);
+    console.log('Updating searchable attributes...');
+    await index.waitForTask(searchableTask.taskUid);
 
-  // Configure filterable attributes
-  await index.updateFilterableAttributes([
-    'occupation_group_concept_id',
-    'application_deadline',
-  ]);
+    // Configure filterable attributes
+    const filterableTask = await index.updateFilterableAttributes([
+      'occupation_group_concept_id',
+      'application_deadline',
+    ]);
+    console.log('Updating filterable attributes...');
+    await index.waitForTask(filterableTask.taskUid);
+
+    console.log('Index configuration completed');
+  } catch (error) {
+    console.error('Error configuring index:', error);
+    throw error;
+  }
 
   return index;
 }
