@@ -77,9 +77,7 @@ export async function seedJobsToMeilisearch() {
           continue;
         }
 
-        const addTask = await index
-          .addDocuments(validDocuments)
-          .waitTask({ timeout: 0 });
+        await index.addDocuments(validDocuments).waitTask({ timeout: 0 });
 
         totalSeeded += validDocuments.length;
         console.log(
