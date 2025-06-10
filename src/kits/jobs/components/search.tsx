@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 interface SearchProps {
   onSearch: (query: string) => void;
@@ -9,11 +9,19 @@ interface SearchProps {
 export function Search({ onSearch }: SearchProps) {
   const [query, setQuery] = useState('');
 
+  // Debounce the search with 300ms delay
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      onSearch(query);
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [query, onSearch]);
+
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    onSearch(value);
-  }, [onSearch]);
+  }, []);
 
   return (
     <div className="mb-4">
