@@ -8,14 +8,21 @@ export async function seedJobsToMeilisearch() {
   console.log("Seeding jobs to Meilisearch...");
 
   try {
+    // Delete the existing index completely to avoid primary key conflicts
+    try {
+      console.log("Deleting existing index...");
+      const deleteIndexTask = await meiliClient.deleteIndex(jobsIndex);
+      await meiliClient.tasks.waitForTask(deleteIndexTask.taskUid);
+      console.log("Existing index deleted");
+    } catch (error: any) {
+      // Index might not exist, which is fine
+      if (!error.message?.includes("not found")) {
+        console.error("Error deleting index:", error);
+      }
+    }
+
     await initializeJobsIndex();
     const index = meiliClient.index(jobsIndex);
-
-    // Clear existing documents first
-    console.log("Clearing existing documents...");
-    const deleteTask = await index.deleteAllDocuments();
-    await meiliClient.tasks.waitForTask(deleteTask.taskUid);
-    console.log("Existing documents cleared");
 
     let offset = 0;
     let totalSeeded = 0;
