@@ -14,7 +14,7 @@
     "@types/stream-json": "^1.7.8",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.43.1",
-    "meilisearch": "^0.37.0",
+    "meilisearch": "^0.51.0",
     "next": "15.3.2",
     "pg": "^8.16.0",
     "react": "^19.0.0",
