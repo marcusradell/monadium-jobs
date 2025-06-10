@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "node --test --require tsx/cjs src/**/*.test.ts",
-    "seed-search": "tsx src/lib/seed-meilisearch.ts",
-    "seed-meilisearch": "tsx src/lib/seed-meilisearch.ts"
+    "seed-search": "tsx src/lib/seed-meilisearch.ts"
   },
   "dependencies": {
     "@types/stream-json": "^1.7.8",

@@ -1,0 +1,4 @@
+FROM getmeili/meilisearch:v1.15.0
+ARG MEILI_MASTER_KEY
+ARG MEILI_ENV
+EXPOSE 7700
