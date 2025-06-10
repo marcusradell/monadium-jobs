@@ -1,13 +1,20 @@
-"use server";
+"use client";
 
+import { useState, useCallback } from 'react';
 import { AvailableJobs, Search } from "./components";
 
-export async function AvailableJobsPage() {
+export function AvailableJobsPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
+
   return (
-    <>
-      <h1>Available Jobs</h1>
-      <Search />
-      <AvailableJobs />
-    </>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">Available Jobs</h1>
+      <Search onSearch={handleSearch} />
+      <AvailableJobs searchQuery={searchQuery} />
+    </div>
   );
 }
