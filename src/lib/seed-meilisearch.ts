@@ -12,7 +12,10 @@ export async function seedJobsToMeilisearch() {
     try {
       console.log("Deleting existing index...");
       const deleteIndexTask = await meiliClient.deleteIndex(jobsIndex);
-      await meiliClient.tasks.waitForTask(deleteIndexTask.taskUid, { timeOutMs: 60000 });
+      await meiliClient.tasks.waitForTask(deleteIndexTask.taskUid, { 
+        timeOutMs: 60000,
+        intervalMs: 1000 
+      });
       console.log("Existing index deleted");
     } catch (error: any) {
       // Index might not exist, which is fine
@@ -78,7 +81,10 @@ export async function seedJobsToMeilisearch() {
         console.log(`Task UID: ${addTask.taskUid}, waiting for completion...`);
         
         // Wait for the task and check its status
-        const taskResult = await meiliClient.tasks.waitForTask(addTask.taskUid, { timeOutMs: 60000 });
+        const taskResult = await meiliClient.tasks.waitForTask(addTask.taskUid, { 
+          timeOutMs: 60000,
+          intervalMs: 1000 
+        });
         console.log(`Task status: ${taskResult.status}`);
         
         if (taskResult.status === 'failed') {
