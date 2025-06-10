@@ -77,22 +77,9 @@ export async function seedJobsToMeilisearch() {
           continue;
         }
 
-        const addTask = await index.addDocuments(validDocuments);
-        console.log(`Task UID: ${addTask.taskUid}, waiting for completion...`);
-
-        // Wait for the task and check its status
-        const taskResult = await meiliClient.tasks.waitForTask(
-          addTask.taskUid,
-          { timeout: 60000 },
-        );
-        console.log(`Task status: ${taskResult.status}`);
-
-        if (taskResult.status === "failed") {
-          console.error(`Task failed:`, taskResult.error);
-          throw new Error(
-            `MeiliSearch task failed: ${JSON.stringify(taskResult.error)}`,
-          );
-        }
+        const addTask = await index
+          .addDocuments(validDocuments)
+          .waitTask({ timeout: 0 });
 
         totalSeeded += validDocuments.length;
         console.log(
