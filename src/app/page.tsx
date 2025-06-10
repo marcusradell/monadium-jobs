@@ -1,13 +1,3 @@
-"use server";
+import { AvailableJobsPage } from "@/kits/jobs";
 
-import { AvailableJobs, Search } from "@/kits/jobs";
-
-export default async function Home() {
-  return (
-    <>
-      <h1>Available Jobs</h1>
-      <Search />
-      <AvailableJobs />
-    </>
-  );
-}
+export default AvailableJobsPage;
