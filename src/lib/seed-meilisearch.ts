@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { jobs } from "@/db/schema";
 import { meiliClient, jobsIndex, initializeJobsIndex } from "./meilisearch";
 
-const batchSize = 1000; // Process jobs in batches of 1000
+const batchSize = 1000;
 
 export async function seedJobsToMeilisearch() {
   console.log("Seeding jobs to Meilisearch...");
@@ -12,10 +12,7 @@ export async function seedJobsToMeilisearch() {
     try {
       console.log("Deleting existing index...");
       const deleteIndexTask = await meiliClient.deleteIndex(jobsIndex);
-      await meiliClient.tasks.waitForTask(deleteIndexTask.taskUid, { 
-        timeOutMs: 60000,
-        intervalMs: 1000 
-      });
+      await meiliClient.tasks.waitForTask(deleteIndexTask.taskUid);
       console.log("Existing index deleted");
     } catch (error: any) {
       // Index might not exist, which is fine
@@ -64,13 +61,15 @@ export async function seedJobsToMeilisearch() {
         console.log(
           `Adding ${jobsForSearch.length} documents to Meilisearch...`,
         );
-        
+
         // Validate that documents have required id field
-        const validDocuments = jobsForSearch.filter(doc => doc.id);
+        const validDocuments = jobsForSearch.filter((doc) => doc.id);
         if (validDocuments.length !== jobsForSearch.length) {
-          console.warn(`Filtered out ${jobsForSearch.length - validDocuments.length} documents without valid IDs`);
+          console.warn(
+            `Filtered out ${jobsForSearch.length - validDocuments.length} documents without valid IDs`,
+          );
         }
-        
+
         if (validDocuments.length === 0) {
           console.warn("No valid documents to add in this batch, skipping...");
           offset += batchSize;
@@ -79,17 +78,19 @@ export async function seedJobsToMeilisearch() {
 
         const addTask = await index.addDocuments(validDocuments);
         console.log(`Task UID: ${addTask.taskUid}, waiting for completion...`);
-        
+
         // Wait for the task and check its status
-        const taskResult = await meiliClient.tasks.waitForTask(addTask.taskUid, { 
-          timeOutMs: 60000,
-          intervalMs: 1000 
-        });
+        const taskResult = await meiliClient.tasks.waitForTask(
+          addTask.taskUid,
+          { timeout: 60000 },
+        );
         console.log(`Task status: ${taskResult.status}`);
-        
-        if (taskResult.status === 'failed') {
+
+        if (taskResult.status === "failed") {
           console.error(`Task failed:`, taskResult.error);
-          throw new Error(`MeiliSearch task failed: ${JSON.stringify(taskResult.error)}`);
+          throw new Error(
+            `MeiliSearch task failed: ${JSON.stringify(taskResult.error)}`,
+          );
         }
 
         totalSeeded += validDocuments.length;
@@ -115,13 +116,13 @@ export async function seedJobsToMeilisearch() {
     // Verify the seeding worked
     const stats = await index.getStats();
     console.log(`Meilisearch index stats:`, stats);
-    
+
     // Also check document count
     const documents = await index.getDocuments({ limit: 1 });
     console.log(`Sample document:`, documents.results[0]);
     console.log(`Total documents in index: ${stats.numberOfDocuments}`);
     console.log(`Completed seeding ${totalSeeded} jobs to Meilisearch`);
-    
+
     if (stats.numberOfDocuments === 0) {
       throw new Error("No documents were successfully added to the index!");
     }

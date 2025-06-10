@@ -11,10 +11,11 @@ export const jobsIndex = "jobs";
 export async function initializeJobsIndex() {
   try {
     // Create index if it doesn't exist
-    const createTask = await meiliClient.createIndex(jobsIndex, { primaryKey: "id" });
-    await meiliClient.tasks.waitForTask(createTask.taskUid, { 
-      timeOutMs: 60000,
-      intervalMs: 1000 
+    const createTask = await meiliClient.createIndex(jobsIndex, {
+      primaryKey: "id",
+    });
+    await meiliClient.tasks.waitForTask(createTask.taskUid, {
+      timeout: 60000,
     });
     console.log(`Created index: ${jobsIndex}`);
   } catch (error: any) {
@@ -37,10 +38,7 @@ export async function initializeJobsIndex() {
       "workplace_municipality",
     ]);
     console.log("Updating searchable attributes...");
-    await meiliClient.tasks.waitForTask(searchableTask.taskUid, { 
-      timeOutMs: 60000,
-      intervalMs: 1000 
-    });
+    await meiliClient.tasks.waitForTask(searchableTask.taskUid);
 
     // Configure filterable attributes
     const filterableTask = await index.updateFilterableAttributes([
@@ -48,10 +46,7 @@ export async function initializeJobsIndex() {
       "application_deadline",
     ]);
     console.log("Updating filterable attributes...");
-    await meiliClient.tasks.waitForTask(filterableTask.taskUid, { 
-      timeOutMs: 60000,
-      intervalMs: 1000 
-    });
+    await meiliClient.tasks.waitForTask(filterableTask.taskUid);
 
     console.log("Index configuration completed");
   } catch (error) {
