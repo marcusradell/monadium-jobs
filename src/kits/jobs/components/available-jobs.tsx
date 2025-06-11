@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface Job {
   id: string;
@@ -15,7 +15,7 @@ interface AvailableJobsProps {
   searchQuery?: string;
 }
 
-export function AvailableJobs({ searchQuery = '' }: AvailableJobsProps) {
+export function AvailableJobs({ searchQuery = "" }: AvailableJobsProps) {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [totalHits, setTotalHits] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -26,16 +26,16 @@ export function AvailableJobs({ searchQuery = '' }: AvailableJobsProps) {
       try {
         const params = new URLSearchParams();
         if (searchQuery) {
-          params.set('q', searchQuery);
+          params.set("q", searchQuery);
         }
-        
+
         const response = await fetch(`/api/jobs/search?${params}`);
         const data = await response.json();
-        
+
         setJobs(data.jobs || []);
         setTotalHits(data.totalHits || 0);
       } catch (error) {
-        console.error('Failed to fetch jobs:', error);
+        console.error("Failed to fetch jobs:", error);
       } finally {
         setLoading(false);
       }
@@ -55,7 +55,7 @@ export function AvailableJobs({ searchQuery = '' }: AvailableJobsProps) {
       </p>
       <div className="space-y-6">
         {jobs.map((job) => (
-          <div key={job.id} className="card bg-base-100 shadow-xl">
+          <div key={job.id} className="card bg-base-200 shadow-xl">
             <div className="card-body">
               <h2 className="card-title">{job.headline}</h2>
               {job.webpage_url && (
@@ -71,7 +71,8 @@ export function AvailableJobs({ searchQuery = '' }: AvailableJobsProps) {
               )}
               {job.application_deadline && (
                 <p className="text-sm text-base-content/70">
-                  Deadline: {new Date(job.application_deadline).toLocaleDateString()}
+                  Deadline:{" "}
+                  {new Date(job.application_deadline).toLocaleDateString()}
                 </p>
               )}
               {job.description_text_formatted && (
