@@ -1,8 +1,10 @@
 import { db } from "@/db";
 import { jobs } from "@/db/schema";
 import { meiliClient, jobsIndex, initializeJobsIndex } from "./meilisearch";
+import { eq } from "drizzle-orm";
 
 const batchSize = 1000;
+const softwareDeveloperConceptId = "DJh5_yyF_hEM";
 
 export async function seedJobsToMeilisearch() {
   console.log("Seeding jobs to Meilisearch...");
@@ -37,6 +39,9 @@ export async function seedJobsToMeilisearch() {
         const jobsBatch = await db
           .select()
           .from(jobs)
+          .where(
+            eq(jobs.occupation_group_concept_id, softwareDeveloperConceptId),
+          )
           .limit(batchSize)
           .offset(offset);
 
