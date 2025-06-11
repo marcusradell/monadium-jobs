@@ -9,19 +9,19 @@ primary_region = 'arn'
 [build]
 
 [[mounts]]
-  source = 'monadium_jobs_meilisearch_disc'
-  destination = '/data.ms'
-  initial_size = '1GB'
+source = 'monadium_jobs_meilisearch_disc'
+destination = '/meili_data'
+initial_size = '1GB'
 
 [http_service]
-  internal_port = 7700
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+internal_port = 7700
+force_https = true
+auto_stop_machines = 'stop'
+auto_start_machines = true
+min_machines_running = 0
+processes = ['app']
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
+memory = '1gb'
+cpu_kind = 'shared'
+cpus = 1
