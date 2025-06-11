@@ -8,7 +8,7 @@ services:
       - MEILI_ENV=development
       - MEILI_MASTER_KEY=your-master-key-here
     volumes:
-      - meilisearch_data:/meili_data
+      - meili_data:/meili_data
 
 volumes:
-  meilisearch_data:
+  meili_data:
